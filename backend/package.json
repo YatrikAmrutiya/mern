@@ -1,0 +1,28 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "bla bla bla",
+  "main": "server.js",
+  "nodemonConfig": {
+    "ext": "js",
+    "ignore": [
+      "/api/timeseries.json"
+    ],
+    "delay": "2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js --ignore 'api/timeseries.json",
+    "server": "nodemon server.js --ignore api/timeseries.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^2.0.1",
+    "mongoose": "^6.0.9",
+    "nodemon": "^2.0.13"
+  }
+}
