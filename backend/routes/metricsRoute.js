@@ -62,13 +62,13 @@ async function timeSeries(obj) {
 
     setTimeout(() => {
         try {
-            console.log("writting")
+            // console.log("writting")
             fs.writeFileSync("./api/timeseries.json", JSON.stringify(data), { encoding: 'utf8', flag: 'w' })
 
         } catch (error) {
             console.log(error)
         }
-    }, 1000);
+    }, 500);
 
 }
 
@@ -101,7 +101,6 @@ async function timeSeries(obj) {
 
 
 router.route("/debug/:num").get((req, res) => {
-    console.log('called')
 
     // console.log(typeof parseInt(req.params.num))
     fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
