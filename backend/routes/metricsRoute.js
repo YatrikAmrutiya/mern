@@ -43,10 +43,17 @@ async function timeSeries(obj) {
             min_band: [],
             max_band: [],
             line_status: [],
-            timestamp: []
+            timestamp: [],
+            measure: "",
+            dimensions: []
         }
     ]
-    var com = []
+
+    data[0].measure = obj.measure
+    data[0].dimensions = obj.dimensions
+
+
+
     await fs.readFile("./api/assignment_data/" + obj._id + ".json", "utf-8", function read(err, datas) {
         if (err) {
             throw err;
@@ -68,35 +75,10 @@ async function timeSeries(obj) {
         } catch (error) {
             console.log(error)
         }
-    }, 500);
+    }, 300);
 
 }
 
-// router.route("/lists/custom/:num").get((req, res) => {
-
-//     // console.log(typeof parseInt(req.params.num))
-//     fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
-//         // fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
-//         if (err) {
-//             console.log(err);
-//         }
-//         const objdata = JSON.parse(data)
-//         // Promise.all([timeSeries(objdata[req.params.num])]).then((values) => {
-//         //     console.log(values);
-//         // });
-//         timeSeries(objdata[req.params.num])
-
-
-//     })
-
-//     fs.readFile("./api/timeseries.json", "utf8", function read(err, data) {
-//         if (err) {
-//             console.log(err);
-//         }
-//         const objdata = JSON.parse(data)
-//         res.json(data)
-//     })
-// })
 
 
 
@@ -117,11 +99,19 @@ router.route("/debug/:num").get((req, res) => {
 
     })
 
+    setTimeout(() => {
+        try {
+        } catch (error) {
+            console.log(error)
+        }
+    }, 300);
+
     fs.readFile("./api/timeseries.json", "utf8", function read(err, data) {
         if (err) {
             console.log(err);
         }
         const objdata = JSON.parse(data)
+
         res.json(data)
     })
 })
