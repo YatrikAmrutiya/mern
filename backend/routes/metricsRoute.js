@@ -23,8 +23,6 @@ async function timeSeries(obj) {
     data[0].measure = obj.measure
     data[0].dimensions = obj.dimensions
 
-
-
     await fs.readFile("./api/assignment_data/" + obj._id + ".json", "utf-8", function read(err, datas) {
         if (err) {
             throw err;
