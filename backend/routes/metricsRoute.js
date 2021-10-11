@@ -1,36 +1,7 @@
 const express = require("express")
 const fs = require("fs")
-
 const router = express.Router();
-const Metric = require("../models/metricModel");
-//we don't need a create method but just for debug purposes :D
-router.route("/create").post((req, res) => {
 
-    const measure = req.body.measure;
-    const dimensions = req.body.dimensions;
-    const newMetric = new Metric({
-        measure, dimensions
-    });
-
-    newMetric.save().then(() => { console.log("entered") }).catch(console.error());
-})
-
-router.route("/Metrics").get((req, res) => {
-    Metric.find()
-        .then(foundMetrics => res.json(foundMetrics))
-})
-
-router.route("/lists/:filename").get((req, res) => {
-    fs.readFile("./api/assignment_data/" + req.params.filename + ".json", "utf8", function read(err, data) {
-        // fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
-        if (err) {
-            throw err;
-        }
-        const content = data;
-        res.status(200).send(data)
-        console.log("hello in hereee")
-    })
-})
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -69,9 +40,7 @@ async function timeSeries(obj) {
 
     setTimeout(() => {
         try {
-            // console.log("writting")
             fs.writeFileSync("./api/timeseries.json", JSON.stringify(data), { encoding: 'utf8', flag: 'w' })
-
         } catch (error) {
             console.log(error)
         }
@@ -86,32 +55,18 @@ router.route("/debug/:num").get((req, res) => {
 
     // console.log(typeof parseInt(req.params.num))
     fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
-        // fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
         if (err) {
             console.log(err);
         }
         const objdata = JSON.parse(data)
-        // Promise.all([timeSeries(objdata[req.params.num])]).then((values) => {
-        //     console.log(values);
-        // });
         timeSeries(objdata[req.params.num])
-
-
     })
-
-    setTimeout(() => {
-        try {
-        } catch (error) {
-            console.log(error)
-        }
-    }, 300);
 
     fs.readFile("./api/timeseries.json", "utf8", function read(err, data) {
         if (err) {
             console.log(err);
         }
         const objdata = JSON.parse(data)
-
         res.json(data)
     })
 })
