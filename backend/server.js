@@ -11,8 +11,8 @@ mongoose.connect("mongodb+srv://yatrik:1234@cluster0.fdqmq.mongodb.net/greendeck
 
 //require routes
 app.use("/", require("./routes/metricsRoute"))
-
-app.listen(3001, function () {
+//port
+app.listen(process.env.PORT || 3001, function () {
     console.log("up and running")
 })
 

@@ -5,7 +5,7 @@ const router = express.Router();
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+//populate data points and return
 async function timeSeries(obj) {
     data = [
         {
@@ -22,7 +22,7 @@ async function timeSeries(obj) {
 
     data[0].measure = obj.measure
     data[0].dimensions = obj.dimensions
-
+    //read file named as passed object's _id
     await fs.readFile("./api/assignment_data/" + obj._id + ".json", "utf-8", function read(err, datas) {
         if (err) {
             throw err;
@@ -48,10 +48,9 @@ async function timeSeries(obj) {
 
 
 
+//return the data to plot line chart 
+router.route("/api/debug/:num").get((req, res) => {
 
-router.route("/debug/:num").get((req, res) => {
-
-    // console.log(typeof parseInt(req.params.num))
     fs.readFile("./api/assignment_data/metrics.json", "utf8", function read(err, data) {
         if (err) {
             console.log(err);
