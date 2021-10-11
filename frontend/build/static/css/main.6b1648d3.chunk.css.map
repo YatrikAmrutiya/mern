@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/styles/navbar.css"],"names":[],"mappings":"AAAA,MACE,UACF,CAEA,YACE,SAAU,CACV,qBAAsB,CACtB,oBACF","file":"main.6b1648d3.chunk.css","sourcesContent":[".link {\r\n  color: white;\r\n}\r\n\r\n.link:hover {\r\n  color: red;\r\n  background-color: aqua;\r\n  text-decoration: none;\r\n}\r\n"]}
